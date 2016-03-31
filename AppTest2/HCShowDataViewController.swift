@@ -22,6 +22,7 @@ class HCShowDataViewController: UIViewController {
     @IBOutlet weak var labelApellido: UILabel!
     @IBOutlet weak var labelEmail: UILabel!
     @IBOutlet weak var labelPassword: UILabel!
+    @IBOutlet weak var imagePhoto: UIImageView!
     
     //MARK: - ACTIONS
     @IBAction func selectImageWithCamera(sender: AnyObject) {
@@ -36,6 +37,10 @@ class HCShowDataViewController: UIViewController {
         labelApellido.text = apellido
         labelEmail.text = email
         labelPassword.text = password
+        
+        //redondeamos la imagen
+        imagePhoto.layer.cornerRadius = imagePhoto.frame.size.width / 2
+        imagePhoto.clipsToBounds = true
         // Do any additional setup after loading the view.
     }
 
@@ -104,5 +109,10 @@ extension HCShowDataViewController: UIImagePickerControllerDelegate, UINavigatio
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        imagePhoto.image = image
+        dismissViewControllerAnimated(true, completion: nil)
+        
+    }
     
 }
